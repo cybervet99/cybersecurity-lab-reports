@@ -27,7 +27,7 @@
 * URL: https://m1crosoftsupport.co/login
 * Reported Attacker IP: 102.89.222.143 (Lagos, Nigeria)
 
-### Incident 3: HR Onboarding Email (Alerts #8814 & #8818)
+### Incident 3: HR Onboarding Email (Alert #8814)
 * Verdict: False Positive
 * Sender: onboarding@hrconnex.thm
 * Recipient: j.garcia@thetrydaily.thm
@@ -35,7 +35,7 @@
 
 ## Investigation Steps
 
-### 1. Verification of HR Emails (#8814 & #8818)
+### 1. Verification of HR Emails (#8814)
 Initial triage flagged an inbound onboarding link from hrconnex.thm sent to j.garcia. Cross-referencing the domain in SIEM logs revealed an IT support ticket from internal HR confirming that hrconnex.thm is an authorized third-party platform for new hire paperwork. This activity was marked as a False Positive.
 
 ### 2. Analysis of Amazon Delivery Phish (#8815 & #8816)
@@ -45,9 +45,11 @@ User h.harris received a package delivery warning from amazon.biz containing a s
 User c.allen received a fraudulent notice regarding unauthorized account activity in Nigeria, directing them to log in at m1crosoftsupport.co. The domain uses a typo-squatted string (m1crosoft) to harvest credentials. Marked as True Positive.
 
 ## Classification and Escalation
+* False Positive Justification: Incident #8814, Initial triage flagged an inbound onboarding link from hrconnex.thm sent to j.garcia. Cross-referencing the domain in SIEM logs revealed an IT support ticket from internal HR confirming that hrconnex.thm is an authorized third-party platform for new hire paperwork. This activity was marked as a False Positive.
 
 * True Positive Justification: Incidents #8815, #8816, and #8817 used unauthorized lookalike domains, obfuscated URLs, and urgency-based social engineering to direct users to unverified infrastructure.
 * Escalation Decision:
+  * Alert #8814: Closed. This activity was marked as a False Positive.
   * Alert #8816: Closed. Firewall logs verify 0 bytes were transferred and the outbound TCP session was dropped. No host containment required.
   * Alert #8817: Escalated to L2. Requested global blocklisting for m1crosoftsupport.co across mail and web gateways.
 

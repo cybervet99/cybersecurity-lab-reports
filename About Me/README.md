@@ -20,4 +20,4 @@ Following my military service, I provided IT support at SideArm Sports, consiste
 
 | Incident / Lab Name | Threat Vectors | Key Telemetry / Tools | Report Link |
 | :--- | :--- | :--- | :--- |
-| **Introduction to Phishing** | Brand Impersonation, Bitly Redirects, Typo-Squatting | Egress Firewall Logs, Sandbox, SIEM |  |
+| **Introduction to Phishing** | Brand Impersonation, Bitly Redirects, Typo-Squatting | Egress Firewall Logs, Sandbox, SIEM | [View Incident Report](cybervet99/cybersecurity-lab-reports/thm-introduction-to-phishing/README.md) |

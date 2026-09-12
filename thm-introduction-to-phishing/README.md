@@ -4,7 +4,7 @@
 * Activity Date: November 20, 2025 (20:02:00 UTC - 20:05:55 UTC)
 * Environment: TryHackMe SOC Simulator (Splunk, Email & Network Logs)
 * Objective: Triage inbound phishing alerts, analyze email metadata, correlate firewall telemetry, and establish true/false positive classifications.
-* Outcome: Analyzed 3 alerts. Identified 2 True Positive phishing attempts and 1 False Positive internal business communications.
+* Outcome: Analyzed 4 alerts. Identified 3 True Positive phishing attempts and 1 False Positive internal business communications.
 * Impact: No compromised hosts. Perimeter firewall rules successfully blocked all outbound network connections resulting from link clicks.
 
 ## Technical Details and Artifacts

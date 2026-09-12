@@ -1,4 +1,4 @@
-# SOC Incident Report - Introduction to Phishing Scenario
+# SOC Incident Report - Phishing Scenario
 
 ## Incident Overview
 * Activity Date: November 20, 2025 (20:02:00 UTC - 20:05:55 UTC)

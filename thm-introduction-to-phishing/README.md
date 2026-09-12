@@ -4,7 +4,7 @@
 * Activity Date: November 20, 2025 (20:02:00 UTC - 20:05:55 UTC)
 * Environment: TryHackMe SOC Simulator (Splunk, Email & Network Logs)
 * Objective: Triage inbound phishing alerts, analyze email metadata, correlate firewall telemetry, and establish true/false positive classifications.
-* Outcome: Analyzed 5 alerts. Identified 3 True Positive phishing attempts and 2 False Positive internal business communications.
+* Outcome: Analyzed 3 alerts. Identified 2 True Positive phishing attempts and 1 False Positive internal business communications.
 * Impact: No compromised hosts. Perimeter firewall rules successfully blocked all outbound network connections resulting from link clicks.
 
 ## Technical Details and Artifacts
@@ -55,6 +55,5 @@ User c.allen received a fraudulent notice regarding unauthorized account activit
 
 1. Egress Block Verification: Keep 67.199.248.11 blocked on edge firewalls.
 2. Gateway Filtering: Add m1crosoftsupport.co and amazon.biz to mail gateway blocklists.
-3. Mailbox Cleanup: Purge remaining instances of these messages from employee inboxes.
-4. User Training: Follow up with user h.harris regarding URL shorteners in external emails.
-5. Rule Tuning: Whitelist domain hrconnex.thm for legitimate HR workflows to reduce false positive alerts.
+3. User Training: Follow up with user h.harris regarding URL shorteners in external emails.
+4. Rule Tuning: Whitelist domain hrconnex.thm for legitimate HR workflows to reduce false positive alerts.

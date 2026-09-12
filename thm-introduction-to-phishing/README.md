@@ -1,7 +1,7 @@
 # SOC Incident Report - Phishing Scenario
 
 ## Incident Overview
-* Activity Date: November 20, 2025 (20:02:00 UTC - 20:05:55 UTC)
+* Activity Date: September 12, 2026 (18:02:00 UTC - 18:05:55 UTC)
 * Environment: TryHackMe SOC Simulator (Splunk, Email & Network Logs)
 * Objective: Triage inbound phishing alerts, analyze email metadata, correlate firewall telemetry, and establish true/false positive classifications.
 * Outcome: Analyzed 4 alerts. Identified 3 True Positive phishing attempts and 1 False Positive internal business communications.

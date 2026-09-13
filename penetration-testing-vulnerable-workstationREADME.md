@@ -35,16 +35,15 @@
 ### Phase 3: Vulnerability Assessment & Analysis
 * **Step 3.1:** Automated an enterprise vulnerability scan against target `172.30.0.55` using Tenable Nessus.
 * **Step 3.2:** Evaluated the severity distribution dashboard: **9 Critical**, **7 High**, **18 Medium**, **5 Low**, and **67 Info** findings.
-* **Step 3.3:** Analyzed top critical vulnerabilities flagged by Nessus:
-  * **Plugin 1088 (CVSS 10.0):** vsftpd 2.3.4 Backdoor Execution / Bind Shell Detection
-  * **Plugin 134862 (CVSS 9.8):** Apache Tomcat AJP Connector Request Injection (Ghostcat)
-  * **Plugin 33850 (CVSS 10.0):** Unix Operating System Unsupported Version Detection
-  * **Plugin 34460 (CVSS 10.0):** Unsupported Web Server Detection
-  * **Plugin 32314 & 32321 (CVSS 10.0):** Debian OpenSSH/OpenSSL PRNG Weakness
-  * **Plugin 11356 (CVSS 10.0):** NFS Exported Share Information Disclosure
-  * **Plugin 61708 (CVSS 10.0):** VNC Server 'password' Password
-* **Step 3.4:** Inspected **Nessus Plugin ID 52703**, confirming service identification for `vsftpd v2.3.4` listening on Port 21.
-* **Step 3.5:** Cross-referenced threat intelligence regarding `vsftpd v2.3.4`, which contains an unauthenticated backdoor triggered by sending a smiley face (`:)`) in the username parameter, opening a bound root shell on port 6200.
+* **Step 3.3:** Analyzed top critical vulnerabilities flagged during assessment:
+  * **CVE-2011-2523 (CVSS 9.8):** vsftpd 2.3.4 Unauthenticated Backdoor Remote Code Execution
+  * **CVE-2020-1938 (CVSS 9.8):** Apache Tomcat AJP Connector Request Injection (Ghostcat)
+  * **CVE-2008-0166 (CVSS 10.0):** Debian OpenSSH/OpenSSL PRNG Predictable Key Generation
+  * **CVE-1999-0506 (CVSS 10.0):** VNC Server Default/Weak Password Configuration
+  * **CWE-1104 (CVSS 10.0):** Unsupported / End-of-Life Unix Operating System & Web Server Detection
+  * **NFS Share Info Disclosure (CVSS 10.0):** Unrestricted NFS Export Configuration
+* **Step 3.4:** Confirmed service identification for `vsftpd v2.3.4` listening on TCP Port 21.
+* **Step 3.5:** Cross-referenced threat intelligence regarding `vsftpd v2.3.4` (CVE-2011-2523), which contains an unauthenticated backdoor triggered by sending a smiley face (`:)`) in the username parameter, opening a bound root shell on TCP port 6200.
 
 ### Phase 4: Exploitation & Privilege Verification
 * **Step 4.1:** Launched the Metasploit Framework console on Kali Linux.
@@ -70,6 +69,7 @@
 | **Target IP Address** | `172.30.0.55` |
 | **Attacker IP Address** | `172.30.0.7` |
 | **Primary Exploited Service** | `vsftpd 2.3.4` (Port 21/tcp) |
+| **Primary Identifier** | CVE-2011-2523 (CVSS v3: 9.8) |
 | **Backdoor Access Port** | TCP Port `6200` |
 | **Access Level Obtained** | `root` (UID 0) |
 | **Nessus Critical Findings** | 9 Vulnerabilities (CVSS 9.8 - 10.0) |
@@ -79,7 +79,7 @@
 
 ## Lessons Learned & Remediation Strategy
 
-* **Patch & Lifecycle Management:** Operating end-of-life or compromised software builds (like vsftpd 2.3.4) leaves systems vulnerable to instant remote code execution without needing credential attacks. Systems must be regularly updated or isolated.
+* **Patch & Lifecycle Management:** Operating end-of-life or compromised software builds (like vsftpd 2.3.4 / CVE-2011-2523) leaves systems vulnerable to instant remote code execution without needing credential attacks. Systems must be regularly updated or isolated.
 * **Vulnerability Scanning Integration:** Utilizing automated scanning tools like Nessus helps detect high-risk software versions and rogue listening backdoors prior to adversary exploitation.
 * **Egress & Ingress Firewall Hardening:** Unrestricted `iptables` configurations allow arbitrary ports (e.g., port 6200) to bind and serve remote sessions. Enforcing strict ingress/egress firewall rules limits lateral movement and blocks unauthorized inbound shell bindings.
 

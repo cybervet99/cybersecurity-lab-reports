@@ -48,50 +48,17 @@
   * Plugin 61708 (CVSS 10.0): VNC Server 'password' Password[cite: 3]
 
 ### Exploitation Output
-```text
-[*] Command shell session 1 opened (172.30.0.7:43098 -> 172.30.0.55:6200) at 2025-04-09 10:27:39 -0700
-whoami
-root
-```[cite: 3]
+* Session Triggered: `[*] Command shell session 1 opened (172.30.0.7:43098 -> 172.30.0.55:6200)`[cite: 3]
+* Active Identity: `root`[cite: 3]
 
 ### Host Configuration Verification
-```text
-whoami
-root
-
-ifconfig
-eth0      Link encap:Ethernet  HWaddr 00:50:56:bd:19:a9  
-          inet addr:172.30.0.55  Bcast:172.30.0.255  Mask:255.255.255.0
-          inet6 addr: fe80::250:56ff:febd:19a9/64 Scope:Link
-          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:57 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:72 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:1000 
-          RX bytes:5289 (5.1 KB)  TX bytes:10005 (9.7 KB)
-          Base address:0x2000 Memory:fd5c0000-fd5e0000 
-
-lo        Link encap:Local Loopback  
-          inet addr:127.0.0.1  Mask:255.0.0.0
-          inet6 addr: ::1/128 Scope:Host
-          UP LOOPBACK RUNNING  MTU:16436  Metric:1
-          RX packets:223 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:223 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:0 
-          RX bytes:83401 (81.4 KB)  TX bytes:83401 (81.4 KB)
-```[cite: 3]
+* Interface: `eth0` | IP Address: `172.30.0.55` | Netmask: `255.255.255.0` | HWaddr: `00:50:56:bd:19:a9`[cite: 3]
+* Interface: `lo` | IP Address: `127.0.0.1` | Netmask: `255.0.0.0`[cite: 3]
 
 ### Firewall Audit Output
-```text
-iptables --list
-Chain INPUT (policy ACCEPT)
-target     prot opt source               destination         
-
-Chain FORWARD (policy ACCEPT)
-target     prot opt source               destination         
-
-Chain OUTPUT (policy ACCEPT)
-target     prot opt source               destination         
-```[cite: 3]
+* Chain INPUT: Policy ACCEPT (No restrictive rules)[cite: 3]
+* Chain FORWARD: Policy ACCEPT (No restrictive rules)[cite: 3]
+* Chain OUTPUT: Policy ACCEPT (No restrictive rules)[cite: 3]
 
 ### Vulnerability Plugin Metadata
 * Plugin ID: 52703[cite: 3]
@@ -123,7 +90,6 @@ target     prot opt source               destination
 * Confirmed default `ACCEPT` policies across all chains without restrictive firewall rules, enabling unhindered inbound/outbound attacker traffic[cite: 3].
 
 ## Key Security Takeaways
-
 * Exploit Impact: Operating legacy software such as `vsftpd 2.3.4` introduces critical network risks, allowing attackers to achieve instant root-level compromise without authentication[cite: 3].
 * Defensive Controls: Network segmentation and strict host-based firewalls are mandatory; default open `iptables` configurations fail to contain lateral movement once initial access is gained[cite: 3].
 * Lifecycle Management: Automated vulnerability scanning paired with proactive patch management policies are essential to remediate known CVEs prior to exploitation[cite: 3].

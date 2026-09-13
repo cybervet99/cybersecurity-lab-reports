@@ -21,3 +21,4 @@ Following my military service, I provided IT support at SideArm Sports, consiste
 | Incident / Lab Name | Threat Vectors | Key Telemetry / Tools | Report Link |
 | :--- | :--- | :--- | :--- |
 | **Introduction to Phishing** | Brand Impersonation, Bitly Redirects, Typo-Squatting | Egress Firewall Logs, Sandbox, SIEM | [View Incident Report](/thm-introduction-to-phishing/README.md)|
+| **Exploiting Vulnerable Workstation** | Unauthenticated Backdoor (vsftpd v2.3.4), EOL Service Exploitation | Zenmap, Tenable Nessus, Metasploit Framework, iptables | [View Lab Report](/penetration-testing-vulnerable-workstation/README.md) |

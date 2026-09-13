@@ -36,7 +36,7 @@
 * **Step 3.1:** Automated an enterprise vulnerability scan against target `172.30.0.55` using Tenable Nessus.
 * **Step 3.2:** Evaluated the severity distribution dashboard: **9 Critical**, **7 High**, **18 Medium**, **5 Low**, and **67 Info** findings.
 * **Step 3.3:** Analyzed top critical vulnerabilities flagged by Nessus:
-  * **CVE-2011-2523 / Plugin 1088 (CVSS 9.8 / 10.0):** vsftpd 2.3.4 Backdoor Execution / Bind Shell Detection
+  * **Plugin 1088 (CVSS 10.0):** vsftpd 2.3.4 Backdoor Execution / Bind Shell Detection
   * **Plugin 134862 (CVSS 9.8):** Apache Tomcat AJP Connector Request Injection (Ghostcat)
   * **Plugin 33850 (CVSS 10.0):** Unix Operating System Unsupported Version Detection
   * **Plugin 34460 (CVSS 10.0):** Unsupported Web Server Detection
@@ -44,7 +44,7 @@
   * **Plugin 11356 (CVSS 10.0):** NFS Exported Share Information Disclosure
   * **Plugin 61708 (CVSS 10.0):** VNC Server 'password' Password
 * **Step 3.4:** Inspected **Nessus Plugin ID 52703**, confirming service identification for `vsftpd v2.3.4` listening on Port 21.
-* **Step 3.5:** Cross-referenced threat intelligence regarding `vsftpd v2.3.4` (CVE-2011-2523, CVSS v2 score 10.0 / CVSS v3 score 9.8), which contains an unauthenticated backdoor triggered by sending a smiley face (`:)`) in the username parameter, opening a bound root shell on port 6200.
+* **Step 3.5:** Cross-referenced threat intelligence regarding `vsftpd v2.3.4`, which contains an unauthenticated backdoor triggered by sending a smiley face (`:)`) in the username parameter, opening a bound root shell on port 6200.
 
 ### Phase 4: Exploitation & Privilege Verification
 * **Step 4.1:** Launched the Metasploit Framework console on Kali Linux.
@@ -70,7 +70,6 @@
 | **Target IP Address** | `172.30.0.55` |
 | **Attacker IP Address** | `172.30.0.7` |
 | **Primary Exploited Service** | `vsftpd 2.3.4` (Port 21/tcp) |
-| **Vulnerability Identification** | CVE-2011-2523 (CVSS v3: 9.8 / CVSS v2: 10.0) |
 | **Backdoor Access Port** | TCP Port `6200` |
 | **Access Level Obtained** | `root` (UID 0) |
 | **Nessus Critical Findings** | 9 Vulnerabilities (CVSS 9.8 - 10.0) |

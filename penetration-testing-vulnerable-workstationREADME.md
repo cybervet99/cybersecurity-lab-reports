@@ -10,7 +10,7 @@
 ### Phase 2: Service Enumeration & Port Scanning
 * **Step 2.1:** Configured and launched an "Intense Scan" in Zenmap targeting `172.30.0.55`.
 * **Step 2.2:** Filtered through the 1,000 total scanned ports; 977 ports returned as closed.
-* **Step 2.3:** Enumerated 23 open TCP ports and logged their running service versions (as captured in **Figure 1**):
+* **Step 2.3:** Enumerated 23 open TCP ports and logged their running service versions:
   * **Port 21/tcp:** `vsftpd 2.3.4` (FTP)
   * **Port 22/tcp:** `OpenSSH 4.7p1`
   * **Port 23/tcp:** `Linux telnetd`
@@ -34,31 +34,31 @@
 
 ### Phase 3: Vulnerability Assessment & Analysis
 * **Step 3.1:** Automated an enterprise vulnerability scan against target `172.30.0.55` using Tenable Nessus.
-* **Step 3.2:** Evaluated the severity distribution dashboard (as captured in **Figure 2**): **9 Critical**, **7 High**, **18 Medium**, **5 Low**, and **67 Info** findings.
+* **Step 3.2:** Evaluated the severity distribution dashboard: **9 Critical**, **7 High**, **18 Medium**, **5 Low**, and **67 Info** findings.
 * **Step 3.3:** Analyzed top critical vulnerabilities flagged by Nessus:
+  * **CVE-2011-2523 / Plugin 1088 (CVSS 9.8 / 10.0):** vsftpd 2.3.4 Backdoor Execution / Bind Shell Detection
   * **Plugin 134862 (CVSS 9.8):** Apache Tomcat AJP Connector Request Injection (Ghostcat)
-  * **Plugin 1088 (CVSS 9.8):** Bind Shell Backdoor Detection
   * **Plugin 33850 (CVSS 10.0):** Unix Operating System Unsupported Version Detection
   * **Plugin 34460 (CVSS 10.0):** Unsupported Web Server Detection
   * **Plugin 32314 & 32321 (CVSS 10.0):** Debian OpenSSH/OpenSSL PRNG Weakness
   * **Plugin 11356 (CVSS 10.0):** NFS Exported Share Information Disclosure
   * **Plugin 61708 (CVSS 10.0):** VNC Server 'password' Password
-* **Step 3.4:** Inspected **Nessus Plugin ID 52703** (**Figure 6**), confirming service identification for `vsftpd v2.3.4` listening on Port 21.
-* **Step 3.5:** Cross-referenced threat intelligence regarding `vsftpd v2.3.4`, which contains an unauthenticated backdoor triggered by sending a smiley face (`:)`) in the username parameter, opening a bound root shell on port 6200.
+* **Step 3.4:** Inspected **Nessus Plugin ID 52703**, confirming service identification for `vsftpd v2.3.4` listening on Port 21.
+* **Step 3.5:** Cross-referenced threat intelligence regarding `vsftpd v2.3.4` (CVE-2011-2523, CVSS v2 score 10.0 / CVSS v3 score 9.8), which contains an unauthenticated backdoor triggered by sending a smiley face (`:)`) in the username parameter, opening a bound root shell on port 6200.
 
 ### Phase 4: Exploitation & Privilege Verification
 * **Step 4.1:** Launched the Metasploit Framework console on Kali Linux.
 * **Step 4.2:** Loaded the exploit module: `exploit/unix/ftp/vsftpd_234_backdoor`.
 * **Step 4.3:** Configured target settings (`RHOSTS 172.30.0.55`, `RPORT 21`) and executed the module.
-* **Step 4.4:** Successfully established Command Shell Session 1 (`172.30.0.7:43098 -> 172.30.0.55:6200`) on April 9, 2025, at 10:27:39 -0700 (**Figure 3**).
+* **Step 4.4:** Successfully established Command Shell Session 1 (`172.30.0.7:43098 -> 172.30.0.55:6200`) on April 9, 2025, at 10:27:39 -0700.
 * **Step 4.5:** Issued the identity command `whoami` to verify session permissions.
 * **Step 4.6:** Confirmed return value `root`, establishing unauthenticated root privileges.
 
 ### Phase 5: Post-Exploitation & Target Auditing
-* **Step 5.1:** Executed `ifconfig` within the interactive shell to inspect target network interfaces (**Figure 4**):
+* **Step 5.1:** Executed `ifconfig` within the interactive shell to inspect target network interfaces:
   * **`eth0`:** MAC Address `00:50:56:bd:19:a9` | IP `172.30.0.55` | Netmask `255.255.255.0` | Broadcast `172.30.0.255`
   * **`lo`:** IP `127.0.0.1` | Netmask `255.0.0.0`
-* **Step 5.2:** Audited active network filtering rules by issuing `iptables --list` (**Figure 5**).
+* **Step 5.2:** Audited active network filtering rules by issuing `iptables --list`.
 * **Step 5.3:** Verified that `INPUT`, `FORWARD`, and `OUTPUT` chains all default to `policy ACCEPT` without active restrictive filtering rules, explaining why the backdoor port (6200) was exposed.
 
 ---
@@ -70,6 +70,7 @@
 | **Target IP Address** | `172.30.0.55` |
 | **Attacker IP Address** | `172.30.0.7` |
 | **Primary Exploited Service** | `vsftpd 2.3.4` (Port 21/tcp) |
+| **Vulnerability Identification** | CVE-2011-2523 (CVSS v3: 9.8 / CVSS v2: 10.0) |
 | **Backdoor Access Port** | TCP Port `6200` |
 | **Access Level Obtained** | `root` (UID 0) |
 | **Nessus Critical Findings** | 9 Vulnerabilities (CVSS 9.8 - 10.0) |
